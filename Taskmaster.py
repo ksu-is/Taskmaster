@@ -23,8 +23,10 @@ def add_task():
 def delete_task():
     try:
         task_index = listbox_tasks.curselection()[0]
-        listbox_tasks.delete(task_index)
-    except:
+        confirmation = tkinter.messagebox.askyesno(title="Confirm Deletion", message="Are you sure you want to delete this task?")
+        if confirmation:
+            listbox_tasks.delete(task_index)
+    except IndexError:
         tkinter.messagebox.showwarning(title="Warning!", message="You must select a task.")
 def load_tasks():
     try:
