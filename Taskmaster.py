@@ -32,8 +32,10 @@ def load_tasks():
         listbox_tasks.delete(0, tkinter.END)
         for task in tasks:
             listbox_tasks.insert(tkinter.END, task)
-    except: 
-        tkinter.messagebox.showwarning(title="Warning!", message="Cannot find tasks.dat.")
+    except FileNotFoundError:
+        tkinter.messagebox.showerror(title="Error!", message="The tasks file does not exist.")
+    except Exception as e:
+        tkinter.messagebox.showerror(title="Error!", message=f"An error occurred: {str(e)}")
 
 def save_tasks():
     tasks = listbox_tasks.get(0, listbox_tasks.size())
